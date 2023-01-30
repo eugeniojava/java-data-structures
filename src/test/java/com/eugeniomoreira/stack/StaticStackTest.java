@@ -30,12 +30,10 @@ class StaticStackTest {
     @DisplayName("Should throw IllegalStateException when the stack is full")
     @Test
     void test0() {
-        final var element1 = "element1";
-        final var element2 = "element2";
         staticStack = new StaticStack<>(1);
-        staticStack.add(element1);
+        staticStack.add("element1");
 
-        final var exception = assertThrows(IllegalStateException.class, () -> staticStack.add(element2));
+        final var exception = assertThrows(IllegalStateException.class, () -> staticStack.add("element2"));
         assertEquals("Stack is full", exception.getMessage());
     }
 
