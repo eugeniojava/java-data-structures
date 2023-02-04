@@ -1,14 +1,11 @@
 package com.eugeniomoreira.stack;
 
-public class DynamicStack<T> implements Stack<T> {
+class DynamicStack<T> implements Stack<T> {
     private Node<T> top = null;
 
     @Override
     public void add(T value) {
-        var newNode = new Node<T>();
-        newNode.data = value;
-        newNode.previous = top;
-        top = newNode;
+        top = new Node<>(value, top);
     }
 
     @Override
@@ -36,8 +33,6 @@ public class DynamicStack<T> implements Stack<T> {
         top = null;
     }
 
-    private static class Node<T> {
-        private T data;
-        private Node<T> previous;
+    private record Node<T>(T data, Node<T> previous) {
     }
 }

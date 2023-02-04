@@ -1,6 +1,6 @@
 package com.eugeniomoreira.stack;
 
-public interface Stack<T> {
+interface Stack<T> {
     void add(T value);
 
     T remove();

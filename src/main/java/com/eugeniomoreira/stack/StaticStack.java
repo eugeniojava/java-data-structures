@@ -1,6 +1,6 @@
 package com.eugeniomoreira.stack;
 
-public class StaticStack<T> implements Stack<T> {
+class StaticStack<T> implements Stack<T> {
     private final T[] data;
     private int top = -1;
 
