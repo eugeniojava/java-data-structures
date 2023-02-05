@@ -1,7 +1,6 @@
 package com.eugeniomoreira.stack;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,94 +18,84 @@ class StaticStackTest {
         staticStack = new StaticStack<>(10);
     }
 
-    @DisplayName("Should throw IllegalArgumentException when the requested size of the stack is invalid")
     @ParameterizedTest
     @ValueSource(ints = {-1, 0})
-    void test9(int size) {
+    void shouldThrowIllegalArgumentExceptionWhenTheRequestedSizeOfTheStackIsInvalid(int size) {
         final var exception = assertThrows(IllegalArgumentException.class, () -> new StaticStack<>(size));
         assertEquals("Stack size must be greater than 0", exception.getMessage());
     }
 
-    @DisplayName("Should throw IllegalStateException when the stack is full")
     @Test
-    void test0() {
+    void shouldThrowIllegalStateExceptionWhenTheStackIsFull() {
         staticStack = new StaticStack<>(1);
-        staticStack.add("element1");
+        staticStack.push("element1");
 
-        final var exception = assertThrows(IllegalStateException.class, () -> staticStack.add("element2"));
+        final var exception = assertThrows(IllegalStateException.class, () -> staticStack.push("element2"));
         assertEquals("Stack is full", exception.getMessage());
     }
 
-    @DisplayName("Should add one element to the stack")
     @Test
-    void test1() {
+    void shouldAddOneElementToTheStack() {
         final var element = "element";
 
-        staticStack.add(element);
+        staticStack.push(element);
 
         assertFalse(staticStack.isEmpty());
     }
 
-    @DisplayName("Should throw IllegalStateException when the stack is empty")
     @Test
-    void test2() {
-        final var exception = assertThrows(IllegalStateException.class, () -> staticStack.remove());
+    void shouldThrowIllegalStateExceptionWhenTheStackIsEmpty() {
+        final var exception = assertThrows(IllegalStateException.class, () -> staticStack.pop());
         assertEquals("Stack is empty", exception.getMessage());
     }
 
-    @DisplayName("Should remove the top element of the stack and return it")
     @Test
-    void test3() {
-        staticStack.add("element1");
+    void shouldRemoveTheTopElementOfTheStackAndReturnIt() {
+        staticStack.push("element1");
         final var element2 = "element2";
-        staticStack.add(element2);
+        staticStack.push(element2);
 
-        final var result = staticStack.remove();
+        final var result = staticStack.pop();
 
         assertEquals(element2, result);
     }
 
-    @DisplayName("Should return false when the stack is not full")
     @Test
-    void test4() {
+    void shouldReturnFalseWhenTheStackIsNotFull() {
         final var result = staticStack.isFull();
 
         assertFalse(result);
     }
 
-    @DisplayName("Should return true when the stack is full")
     @Test
-    void test5() {
+    void shouldReturnTrueWhenTheStackIsFull() {
         staticStack = new StaticStack<>(1);
-        staticStack.add("element");
+        staticStack.push("element");
 
         final var result = staticStack.isFull();
 
         assertTrue(result);
     }
 
-    @DisplayName("Should return false when the stack is not empty")
     @Test
-    void test6() {
-        staticStack.add("element");
+    void shouldReturnFalseWhenTheStackIsNotEmpty() {
+        staticStack.push("element");
 
         final var result = staticStack.isEmpty();
 
         assertFalse(result);
     }
 
-    @DisplayName("Should return true when the stack is empty")
     @Test
-    void test7() {
+    void shouldReturnTrueWhenTheStackIsEmpty() {
         final var result = staticStack.isEmpty();
 
         assertTrue(result);
     }
 
-    @DisplayName("Should clear the stack")
     @Test
-    void test8() {
-        staticStack.add("element");
+    void shouldClearTheStack() {
+        staticStack.push("element");
 
         staticStack.clear();
 

@@ -1,7 +1,6 @@
 package com.eugeniomoreira.stack;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,65 +16,58 @@ class DynamicStackTest {
         dynamicStack = new DynamicStack<>();
     }
 
-    @DisplayName("Should add one element to the stack")
     @Test
-    void test1() {
+    void shouldAddOneElementToTheStack() {
         final var element = "element";
 
-        dynamicStack.add(element);
+        dynamicStack.push(element);
 
         assertFalse(dynamicStack.isEmpty());
     }
 
-    @DisplayName("Should throw IllegalStateException when the stack is empty")
     @Test
-    void test2() {
-        final var exception = assertThrows(IllegalStateException.class, () -> dynamicStack.remove());
+    void shouldThrowIllegalStateExceptionWhenTheStackIsEmpty() {
+        final var exception = assertThrows(IllegalStateException.class, () -> dynamicStack.pop());
         assertEquals("Stack is empty", exception.getMessage());
     }
 
-    @DisplayName("Should remove the top element of the stack and return it")
     @Test
-    void test3() {
-        dynamicStack.add("element1");
+    void shouldRemoveTheTopElementOfTheStackAndReturnIt() {
+        dynamicStack.push("element1");
         final var element2 = "element2";
-        dynamicStack.add(element2);
+        dynamicStack.push(element2);
 
-        final var result = dynamicStack.remove();
+        final var result = dynamicStack.pop();
 
         assertEquals(element2, result);
     }
 
-    @DisplayName("Should return false when the stack is not full")
     @Test
-    void test4() {
+    void shouldReturnFalseWhenTheStackIsNotFull() {
         final var result = dynamicStack.isFull();
 
         assertFalse(result);
     }
 
-    @DisplayName("Should return false when the stack is not empty")
     @Test
-    void test6() {
-        dynamicStack.add("element");
+    void shouldReturnFalseWhenTheStackIsNotEmpty() {
+        dynamicStack.push("element");
 
         final var result = dynamicStack.isEmpty();
 
         assertFalse(result);
     }
 
-    @DisplayName("Should return true when the stack is empty")
     @Test
-    void test7() {
+    void shouldReturnTrueWhenTheStackIsEmpty() {
         final var result = dynamicStack.isEmpty();
 
         assertTrue(result);
     }
 
-    @DisplayName("Should clear the stack")
     @Test
-    void test8() {
-        dynamicStack.add("element");
+    void shouldClearTheStack() {
+        dynamicStack.push("element");
 
         dynamicStack.clear();
 

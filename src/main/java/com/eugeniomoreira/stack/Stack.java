@@ -1,13 +1,13 @@
 package com.eugeniomoreira.stack;
 
 interface Stack<T> {
-    void add(T value);
-
-    T remove();
-
-    boolean isFull();
+    void clear();
 
     boolean isEmpty();
 
-    void clear();
+    boolean isFull();
+
+    T pop();
+
+    void push(T value);
 }

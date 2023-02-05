@@ -2,39 +2,23 @@ package com.eugeniomoreira.stack;
 
 class StaticStack<T> implements Stack<T> {
     private final T[] data;
-    private int top = -1;
+    private int top;
 
     @SuppressWarnings("unchecked")
-    public StaticStack(int size) {
+    StaticStack(int size) {
         if (size <= 0) {
             throw new IllegalArgumentException("Stack size must be greater than 0");
         }
         data = (T[]) new Object[size];
+        top = -1;
     }
 
     @Override
-    public void add(T value) {
-        if (isFull()) {
-            throw new IllegalStateException("Stack is full");
+    public void clear() {
+        for (var i = 0; i <= top; i++) {
+            data[i] = null;
         }
-        top++;
-        data[top] = value;
-    }
-
-    @Override
-    public T remove() {
-        if (isEmpty()) {
-            throw new IllegalStateException("Stack is empty");
-        }
-        var value = data[top];
-        data[top] = null;
-        top--;
-        return value;
-    }
-
-    @Override
-    public boolean isFull() {
-        return top == data.length - 1;
+        top = -1;
     }
 
     @Override
@@ -43,10 +27,27 @@ class StaticStack<T> implements Stack<T> {
     }
 
     @Override
-    public void clear() {
-        for (int i = 0; i <= top; i++) {
-            data[i] = null;
+    public boolean isFull() {
+        return top == data.length - 1;
+    }
+
+    @Override
+    public T pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
         }
-        top = -1;
+        var removedValue = data[top];
+        data[top] = null;
+        top--;
+        return removedValue;
+    }
+
+    @Override
+    public void push(T value) {
+        if (isFull()) {
+            throw new IllegalStateException("Stack is full");
+        }
+        top++;
+        data[top] = value;
     }
 }
